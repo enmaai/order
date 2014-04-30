@@ -8,8 +8,13 @@
     <style>
         .ks-order-wrapper{list-style:none;padding:0;margin:10px;overflow:hidden;background:#f2f2f2;border:1px solid #e3e3e3;}
         .ks-order-item{float:left;}
-        .ks-order-item a{display:block;padding:5px 20px;border-right:1px solid #ddd;}
+        .ks-order-item a{display:block;padding:5px 20px;border-right:1px solid #ddd;color:#404040;}
         .ks-order-activated,.ks-order-activated a,.ks-order-item a:hover{background:#fff;color:#f80;}
+        .ks-order-item .icon{display:inline-block;width:10px;height:10px;line-height:10px;margin-left:4px;font-size:0;vertical-align:middle;background:url(http://gtms04.alicdn.com/tps/i4/T1kzgfFxNcXXbQC3Ye-700-500.png) no-repeat;}
+        .ks-order-descending .icon{background-position:-180px -40px;}
+        .ks-order-ascending .icon{background-position:-160px -40px;}
+        .ks-order-activated-descending .icon,.ks-order-descending a:hover .icon{background-position:-220px -40px;}
+        .ks-order-activated-ascending .icon,.ks-order-ascending a:hover .icon{background-position:-200px -40px;}
     </style>
 </head>
 <body>
@@ -32,7 +37,7 @@
     }
 
     S.use('gallery/order/1.0/index', function (S, Order) {
-        new Order({
+        var order = new Order({
             node : '#foo',
             data : [{
                 displayName : '默认',
@@ -47,6 +52,11 @@
                 displayName : '时间'
             }]
         });
+        S.log(order.getCurrentNode());
+        S.log(order.getCurrentData());
+        order.on('orderChange',function(e){
+            S.log(e);
+        })
     })
 </script>
 </body>
